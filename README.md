@@ -12,6 +12,7 @@ A minimal, elegant bookmark manager built with Next.js 14, Supabase, and Tailwin
 - Automatic favicon loading  
 - Responsive UI with dark mode  
 
+Live Demo : `https://book-mark-svhv.vercel.app/`
 
 ---
 
