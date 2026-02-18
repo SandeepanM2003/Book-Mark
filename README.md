@@ -1,4 +1,4 @@
-# Smart Bookmark Manager
+# Bookmark
 
 A minimal, elegant bookmark manager built with Next.js 14, Supabase, and Tailwind CSS.
 
