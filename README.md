@@ -67,7 +67,7 @@ create policy "Users can delete own bookmarks"
 Create `.env.local` from the example:
 
 ```bash
-cp .env.local.example .env.local
+cp .env.local
 ```
 
 Fill in:
@@ -102,29 +102,6 @@ Open [http://localhost:3000](http://localhost:3000)
    - Supabase: **Authentication → URL Configuration → Redirect URLs** → add `https://your-app.vercel.app/auth/callback`
    - Google OAuth: **Authorized redirect URIs**
 
----
-
-## Problems Encountered & Solutions
-
-### 1. Next.js 14 cookies() async API
-**Problem:** `cookies()` from `next/headers` needed to be awaited in Next.js 14.  
-**Solution:** Changed `const cookieStore = cookies()` to `const cookieStore = await cookies()` in the server Supabase client.
-
-### 2. Realtime subscription scope
-**Problem:** Realtime was firing for all users' inserts.  
-**Solution:** Added a `filter: user_id=eq.${user.id}` to the Supabase Realtime channel subscription to scope events to the current user only.
-
-### 3. Middleware infinite redirect
-**Problem:** The middleware was redirecting the auth callback route, causing OAuth to loop.  
-**Solution:** Scoped the middleware matcher to `/bookmarks/:path*` only, excluding `/auth/callback`.
-
-### 4. Favicon loading errors
-**Problem:** Some favicon URLs returned 404 and showed broken images.  
-**Solution:** Added an `onError` handler to hide the `<img>` when the favicon fails to load, falling back to a neutral icon container.
-
-### 5. URL normalisation
-**Problem:** Users pasting URLs without `https://` caused invalid bookmark links.  
-**Solution:** Prepend `https://` if the URL doesn't already start with `http`.
 
 ---
 
